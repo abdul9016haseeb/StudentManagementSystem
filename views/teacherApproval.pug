@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Teacher Registration Approved
+    style.
+      | body {
+      |   font-family: Arial, sans-serif;
+      |   background-color: #f4f4f4;
+      |   margin: 0;
+      |   padding: 0;
+      | }
+      | .container {
+      |   max-width: 600px;
+      |   margin: 50px auto;
+      |   background-color: #fff;
+      |   padding: 20px;
+      |   border-radius: 10px;
+      |   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      | }
+      | h1 {
+      |   color: #333;
+      | }
+      | p {
+      |   color: #555;
+      | }
+       .contact-info {
+      |   margin-top: 30px;
+      |   padding-top: 20px;
+      |   border-top: 1px solid #ddd;
+      | }
+      | .contact-info p {
+      |   font-size: 14px;
+      |   color: #777;
+      | }
+
+  body
+    .container
+      h1 Teacher Registration Approved
+      p Dear Teacher,
+      p Congratulations! #{email}, <br><br>      Your registration has been approved by the admin. We are happy to inform you that you are hired as a teacher in our institution.
+      p Please feel free to reach out with any questions. <br>Login as a Teacher<button><a href="https://localhost:3000/teacher/login">Go to login page</a></button>
+       
+      p Best regards, <br>     The Institution Team
+
+      .contact-info
+        p If you need any assistance, please contact our admin:
+        p Admin Email: <a href="">#{appUser}<a> <br> Phone Number: #{Ph}
