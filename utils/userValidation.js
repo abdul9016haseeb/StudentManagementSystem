@@ -279,7 +279,7 @@ const batch = [
     .isLength({ min: 2, max: 50 }).withMessage("Batch name must be between 2 and 50 characters")
     .custom(value => {
         if (/\d/.test(value)) { // Check if the value contains any digits
-            throw new Error('First name must not contain numbers');
+            throw new Error('Batch name must not contain numbers');
         }
         return true;
     }),
@@ -332,7 +332,7 @@ const additionalDetails = [
 ]
 
 const course = [
-    body("course_name").not().isEmpty().withMessage("course name must not be empty").bail()
+    body("courseName").not().isEmpty().withMessage("course name must not be empty").bail()
     .isString().withMessage('course name must be a string').bail()
         .isLength({ min: 2, max: 50 }).withMessage("course name must be between 2 and 50 characters")
         .custom(value => {

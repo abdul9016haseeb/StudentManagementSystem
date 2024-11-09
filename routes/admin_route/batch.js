@@ -1,38 +1,38 @@
 const express = require('express');
 const router = express.Router();
 const validator = require('../../utils/userValidation');
-const adminController = require('../../controller/adminController');
-const {authenticatJWT} = require('../../middleware/jwtMiddleware');
+const AdminController = require('../../controller/adminController/index');
+const AuthenticateJWT = require('../../middleware/jwtMiddleware');
 
 
 
-router.get('/batch',[authenticatJWT,validator.batch],adminController.getBatch);
+router.get('/batch',[AuthenticateJWT.authAdmin(),validator.batch],AdminController.Batch.getBatch);
 
-router.post('/create-batch',[authenticatJWT,validator.batch],adminController.createBatch);
+router.post('/create-batch',[AuthenticateJWT.authAdmin(),validator.batch],AdminController.Batch.createBatch);
 
-router.put('/update-batch/:batch_id',[authenticatJWT,validator.batch],adminController.updateBatch);
+router.put('/update-batch/:batch_id',[AuthenticateJWT.authAdmin(),validator.batch],AdminController.Batch.updateBatch);
 
-router.delete('/delete-batch/:batch_id',[authenticatJWT,validator.batch],adminController.deleteBatch);
+router.delete('/delete-batch/:batch_id',[AuthenticateJWT.authAdmin(),validator.batch],AdminController.Batch.deleteBatch);
 
 
 //assign teachers to batches
-router.post('/batch/addTeacher',[authenticatJWT],adminController.addTeacher_tobatch);
+router.post('/batch/addTeacher',[AuthenticateJWT.authAdmin()],AdminController.Batch.addTeacher_tobatch);
 
 
 //delete teacher and also show the teacher associated in a batch
-router.delete('/batch/:batch_id/removeTeacher/:teacher_id',[authenticatJWT],adminController.deleteTeacher_tobatch);
+router.delete('/batch/:batch_id/removeTeacher/:teacher_id',[AuthenticateJWT.authAdmin()],AdminController.Batch.deleteTeacher_tobatch);
 
-router.get('/batch/getTeacher/:batch_id',[authenticatJWT],adminController.getTeacher_bybatch);
+router.get('/batch/getTeacher/:batch_id',[AuthenticateJWT.authAdmin()],AdminController.Batch.getTeacher_bybatch);
 
 
 
 
 // students by batch
-router.patch('/batch/addStudent',[authenticatJWT],adminController.addStudent_tobatch);
+router.patch('/batch/addStudent',[AuthenticateJWT.authAdmin()],AdminController.Batch.addStudent_tobatch);
 
-router.patch('/batch/removeStudent',[authenticatJWT],adminController.deleteStudent_tobatch);
+router.patch('/batch/removeStudent',[AuthenticateJWT.authAdmin()],AdminController.Batch.deleteStudent_tobatch);
 
-router.get('/batch/getStudents/:batch_id',[authenticatJWT],adminController.getStudent_bybatch);
+router.get('/batch/getStudents/:batch_id',[AuthenticateJWT.authAdmin()],AdminController.Batch.getStudent_bybatch);
 
 
 module.exports = router;

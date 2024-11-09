@@ -1,15 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const adminController = require('../../controller/adminController');
-const {authenticatJWT} = require('../../middleware/jwtMiddleware');
-
-
+const AdminController = require('../../controller/adminController/index');
+const AuthenticateJWT = require('../../middleware/jwtMiddleware');
 
 // router.get('/getStudents',adminController.getStudents)
-router.get('/getStudents',[authenticatJWT],adminController.getStudents);
+router.get('/getStudents',[AuthenticateJWT.authAdmin()],AdminController.GetUser.getStudents);
 
-
-router.get('/getTeachers',[authenticatJWT],adminController.getTeachers);
-
+router.get('/getTeachers',[AuthenticateJWT.authAdmin()],AdminController.GetUser.getTeachers);
 
 module.exports = router;

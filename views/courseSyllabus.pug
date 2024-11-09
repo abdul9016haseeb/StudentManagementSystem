@@ -1,0 +1,23 @@
+//- course.pug
+
+doctype html
+html
+  head
+    title= course.courseName
+    link(rel="stylesheet" href=`http://localhost:4000/static/style.css`) 
+  body
+    h1= course.courseName
+    p Description: #{course.description}
+    
+    h2 Topics
+    each topicTitle, index in Object.keys(course.topics)
+      h3 #{topicTitle}
+      ul
+        each subtopic in course.topics[topicTitle]
+          li= subtopic
+    
+    h2 Objectives
+    p= course.objectives
+    
+    h2 Assessment Criteria
+    p= course.assessmentCriteria

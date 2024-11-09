@@ -1,25 +1,9 @@
 const express =  require('express');
 const router = express.Router();
 const validator = require('../../utils/userValidation');
-const adminController = require('../../controller/adminController');
-const {authenticatJWT} = require('../../middleware/jwtMiddleware');
+const AdminController = require('../../controller/adminController/index');
+const AuthenticateJWT = require('../../middleware/jwtMiddleware');
 
+router.post('/course',[AuthenticateJWT.authAdmin(),validator.course],AdminController.Course.newCourseSyllabus);
 
-
-
-router.post('/course',[authenticatJWT,validator.course],adminController.course)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = router
+module.exports = router;

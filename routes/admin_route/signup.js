@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const validator = require('../../utils/userValidation');
-const adminController = require('../../controller/adminController');
-const { authenticatJWT } = require('../../middleware/jwtMiddleware');
+const AdminController = require('../../controller/adminController/index');
 
-
-router.post('/signup',[validator.signup], adminController.signUp);
-
+router.post('/signup',[validator.signup], AdminController.SignUp.signUp);
 
 module.exports = router;
