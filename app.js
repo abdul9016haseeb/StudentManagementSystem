@@ -8,6 +8,7 @@ const Response = require('./helpers/response');
 const PORT = process.env.PORT || 5000;
 // const AuthenticateJWT = require('./middleware/jwtMiddleware');
 const adminController = require('./controller/adminController/index');
+const db = require('./model/index');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
