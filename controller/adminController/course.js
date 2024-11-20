@@ -49,8 +49,66 @@ class Course {
                         else resolve(html);
                     })
                 })
-                res.send(html);
-
+                async function generatePDF() {
+                    // Launch a new browser instance
+                    const browser = await puppeteer.launch({
+                      headless: false, // Use new headless mode
+                    });
+                  
+                    // Create a new page
+                    const page = await browser.newPage();
+                  
+                    // Set viewport for consistent rendering
+                    await page.setViewport({
+                      width: 1200,
+                      height: 800,
+                      deviceScaleFactor: 1
+                    });
+                  
+                    // Navigate to a URL or set HTML content
+                    // Option 1: Load from URL
+                    await page.goto('https://example.com', {
+                      waitUntil: 'networkidle0' // Wait until network is idle
+                    });
+                  
+                    // Option 2: Set HTML content directly
+                    await page.setContent(`
+                      <html>
+                        <head>
+                          <style>
+                            body { font-family: Arial, sans-serif; padding: 40px; }
+                            .header { color: #333; font-size: 24px; }
+                          </style>
+                        </head>
+                        <body>
+                          <h1 class="header">Generated PDF Document</h1>
+                          <p>This is a sample PDF generated with Puppeteer</p>
+                        </body>
+                      </html>
+                    `);
+                  
+                    // Generate PDF with options
+                    const pdf = await page.pdf({
+                      format: 'A4',
+                      margin: {
+                        top: '40px',
+                        right: '40px',
+                        bottom: '40px',
+                        left: '40px'
+                      },
+                      printBackground: true,
+                      preferCSSPageSize: true,
+                      displayHeaderFooter: true,
+                      headerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">Header Text</div>',
+                      footerTemplate: '<div style="font-size: 10px; text-align: center; width: 100%;">Page <span class="pageNumber"></span> of <span class="totalPages"></span></div>'
+                    });
+                  
+                    // Close browser
+                    await browser.close();
+                  
+                    return pdf;
+                  }
+                  res.send(await generatePDF());
             } catch (error) {
                 console.error(error);
                 return Response.ServerErrorResponse(res);

@@ -44,9 +44,9 @@ html
       .email-header
         | Email Verification
       p
-        | Dear #{name},
+        | Dear #{email},
       p
-        | Thank you for signing up. Please use the following One-Time Password (OTP) to verify your email:
+        |#{message}. Please use the following One-Time Password (OTP) to verify your email:
       .otp-code
         | #{otp}
       p

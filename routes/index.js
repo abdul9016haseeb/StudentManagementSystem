@@ -31,7 +31,7 @@ const teacherRegistration = require('./teacher_route/registration');
 const ssoLoginTeacher = require('./teacher_route/SSO_login');
 const ssoSignupTeacher = require('./teacher_route/SSO_signup');
 const verifyOtpTeacher = require('./teacher_route/verifyOtp');
-const teachercheck = require('./teacher_route/check');
+const forgotPassword = require('./teacher_route/forgot');
 
 teacher_router.use('/teacher',teacherSignup);
 teacher_router.use('/teacher',teacherLogin);
@@ -40,7 +40,7 @@ teacher_router.use('/teacher',teacherRegistration);
 teacher_router.use('/teacher',ssoLoginTeacher);
 teacher_router.use('/teacher',ssoSignupTeacher);
 teacher_router.use('/teacher',verifyOtpTeacher);
-teacher_router.use('/teacher',teachercheck);
+teacher_router.use('/teacher',forgotPassword);
 
 //student route
 const studentSignup = require('./student_route/signup');

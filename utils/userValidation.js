@@ -286,7 +286,6 @@ const batch = [
 
 ]
 
-
 const additionalDetails = [
     body('name', 'Invalid name. Name should only contain alphabetic characters.').isAlpha('en-US', { ignore: ' ' }),
 
@@ -345,6 +344,17 @@ const course = [
 
 ]
 
+const submitResetEmail = [
+    body('email')
+        .not().isEmpty().withMessage("email must not be empty").bail()
+        .isEmail().withMessage("Invalid email format").bail()
+        .custom((value) => {
+            if (!value.endsWith('@gmail.com')) {
+                throw new Error('Email must be a Gmail address');
+            }
+            return true;
+        }),
+]
 
 module.exports = {
     signup,
@@ -354,5 +364,6 @@ module.exports = {
     login,
     batch,
     course,
+    submitResetEmail,
     validationResult
 }

@@ -7,7 +7,8 @@ const router = require('./routes/index');
 const Response = require('./helpers/response');
 const PORT = process.env.PORT || 5000;
 // const AuthenticateJWT = require('./middleware/jwtMiddleware');
-const adminController = require('./controller/adminController/index');
+const AdminController = require('./controller/adminController/index');
+const db = require('./model/index');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -22,13 +23,18 @@ app.get('/', (req, res) => {
     Response.ClientErrorResponse(res, response);
 });
 
-app.get('/admin/courseSyllabus/:courseId',adminController.Course.downloadCourseSyllabus(app));
+app.get('/admin/courseSyllabus/:courseId',AdminController.Course.downloadCourseSyllabus(app));
 
 (async () => {
     await db.sequelize.sync({ force: false }); // Ensure all tables and relationships sync
     console.log('all models are successfully synched');
 })();
 
+
+app.use((err,req,res,next)=>{
+    console.error(err);
+    
+})
 
 app.listen(PORT, (err) => {
     if (err) throw err;

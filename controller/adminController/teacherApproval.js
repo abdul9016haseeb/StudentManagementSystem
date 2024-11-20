@@ -72,7 +72,12 @@ static approveTeacher = async (req, res) => {
             role: role,
         });
 
-        await emailService(email, path.join(__dirname, '../../views/teacherApproval.pug'));
+        await emailService(
+            {
+                email:email, 
+                path:path.join(__dirname, '../../views/teacherApproval.pug'),
+            }
+        );
 
         return Response.SuccessResponse(res,{
             message:"Teacher approved",

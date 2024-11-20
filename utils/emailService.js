@@ -14,9 +14,9 @@ const transporter = nodemailer.createTransport({
     },
 })
 
-const emailService= async(email,path='',otp=0)=>{
-    const html = pug.renderFile(path, { otp,email,appUser,Ph });
-    try{
+const emailService = async ({ email, path = '', otp = 0 ,message=""}) => {
+    const html = pug.renderFile(path, { otp, email, appUser, Ph ,message});
+    try {
         const emailOptions = {
             from: appUser,
             to: email,
@@ -24,10 +24,10 @@ const emailService= async(email,path='',otp=0)=>{
             html: html,
         };
         // await transporter.sendMail(emailOptions)
-          await previewEmail(emailOptions);
-       
-    }catch(err){
-        console.log("error rendering file",err.stack);
+        await previewEmail(emailOptions);
+
+    } catch (err) {
+        console.log("error rendering file", err.stack);
     };
 };
 

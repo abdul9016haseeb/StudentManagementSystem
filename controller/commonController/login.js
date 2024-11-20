@@ -54,13 +54,13 @@ static login = async (req, res) => {
                 }
             });
         }
-        Response.ClientErrorResponse(res, {
+        return Response.ClientErrorResponse(res, {
             message: "incorrect password",
             statusCode: 401,
         });
     } catch (err) {
         console.log(err);
-        Response.ServerErrorResponse(res);
+        return Response.ServerErrorResponse(res);
     };
 };
 
