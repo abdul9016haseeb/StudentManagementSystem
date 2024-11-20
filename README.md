@@ -28,30 +28,3 @@ note:-
 
 
 
-   Response.SuccessResponse(res,{
-            message:"logout successfully",
-        })
-
-Response.ServerErrorResponse(res);
-
- return Response.ClientErrorResponse(res, {
-                message: "Validation error",
-                errors: errors.array(),
-                statusCode: 422,
-            });
-
-
-
-
- // const CommonResponse = (StatusCode, Message, Status) => {
-        //     const Response = {
-        //         StatusCode: StatusCode,
-        //         Message: Message,
-        //         Status: Status,
-        //     };
-        //     return Response;
-        // };
-
-
-        // return res.status(201)
-        // .send((CommonResponse(201, "Account created successfully", true)));
