@@ -23,5 +23,9 @@ db.Student.belongsTo(db.Batch, { foreignKey: 'batch_id' });
 db.Batch.belongsToMany(db.Teacher, { through: 'BatchTeacher' });
 db.Teacher.belongsToMany(db.Batch, { through: 'BatchTeacher' });
 
+(async () => {
+    await db.sequelize.sync({ force: false }); // Ensure all tables and relationships sync
+    console.log('all models are successfully synched');
+})();
 
 module.exports = db;
