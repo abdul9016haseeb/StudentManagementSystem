@@ -14,7 +14,7 @@ const db = require('./model/index');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/', router);
-app.use('/static',express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -30,7 +30,21 @@ app.use((err, req, res, next) => {
     console.error(err);
 })
 
-app.listen(PORT, (err) => {
-    if (err) throw err;
-    console.log(`server listening to the port ${PORT}`);
-});
+    (async () => {
+        try {
+            await db.sequelize.sync({ force: false }); // Ensure all tables and relationships sync
+            console.log('Successfull Database Connection, All Models are Successfully Synched');
+
+            // ONLY START THE SERVER AFTER a SUCCESSFUL DB CONNECTION
+            app.listen(PORT, (err) => {
+                if (err) throw err;
+                console.log(`server listening to the port ${PORT}`);
+            });
+
+
+        } catch (error) {
+            console.error('Failed to connect to the database:', error);
+            process.exit(1); // Exit if the DB connection fails
+        }
+    })();
+
